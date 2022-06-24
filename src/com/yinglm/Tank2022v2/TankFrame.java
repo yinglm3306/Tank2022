@@ -6,8 +6,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class TankFrame extends Frame {
-    private int x =100 , y =100;
-    private static final int SPEED=5;
+    private Tank myTank;
+    private Tank enemy;
+
 
     public TankFrame(){
         this.setTitle("tank war");
@@ -16,12 +17,16 @@ public class TankFrame extends Frame {
 
         this.addKeyListener(new TankKeyListener());  //Observer
 
+        myTank = new Tank(100,100,Dir.R);
+        enemy  = new Tank(200,200,Dir.D);
     }
 
     @Override
     public void paint(Graphics g) {
 
-        g.fillRect(x,y,50,50);
+        myTank.paint(g);
+        enemy.paint(g);
+
       //  x++;
 //        System.out.println("paint");  此方法画图时自动调用
 
@@ -31,19 +36,15 @@ public class TankFrame extends Frame {
 
         @Override
         public void keyPressed(KeyEvent e) {
-            int key = e.getKeyCode();
-               switch (key){
-                   case KeyEvent.VK_LEFT : x-=SPEED; break;
-                   case KeyEvent.VK_UP : y-=SPEED; break;
-                   case KeyEvent.VK_RIGHT : x+=SPEED; break;
-                   case KeyEvent.VK_DOWN : y+=SPEED; break;
+
+            myTank.keyPressed(e);
 
 
-               }
         }
 
         @Override
         public void keyReleased(KeyEvent e) {
+            myTank.keyReleased(e);
 
         }
     }
