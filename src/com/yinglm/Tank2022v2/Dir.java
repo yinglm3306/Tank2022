@@ -7,5 +7,5 @@ package com.yinglm.Tank2022v2;
  * @Version: 1.0
  **/
 public enum Dir {
-    L,U,R,D,STOP
+    L,U,R,D
 }

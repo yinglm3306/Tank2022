@@ -14,6 +14,7 @@ public class Tank {
     private Dir dir;
     private boolean bL,bR,bU,bD;
     private static final int SPEED=5;
+    private boolean moving = false;
 
     public Tank(int x, int y,Dir dir) {
         this.x = x;
@@ -41,15 +42,21 @@ public class Tank {
     }
 
     private void setMainDir() {
-        if(!bL&&!bR&&!bU&&!bD)   dir=Dir.STOP;
-        if(bL&&!bR&&!bU&&!bD)   dir=Dir.L;
-        if(!bL&&bR&&!bU&&!bD)   dir=Dir.R;
-        if(!bL&&!bR&&bU&&!bD)   dir=Dir.U;
-        if(!bL&&!bR&&!bU&&bD)   dir=Dir.D;
+        if(!bL&&!bR&&!bU&&!bD)   moving=false;
+
+        else
+        {
+            moving=true;
+            if(bL&&!bR&&!bU&&!bD)   dir=Dir.L;
+            if(!bL&&bR&&!bU&&!bD)   dir=Dir.R;
+            if(!bL&&!bR&&bU&&!bD)   dir=Dir.U;
+            if(!bL&&!bR&&!bU&&bD)   dir=Dir.D;
+        }
 
     }
 
     private void move() {
+        if(!moving) return;
         switch (dir){
             case L:  x-=SPEED; break;
             case U:  y-=SPEED; break;
