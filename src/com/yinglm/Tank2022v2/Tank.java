@@ -1,7 +1,10 @@
 package com.yinglm.Tank2022v2;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 /**
  * @Auther: yingliming
@@ -24,7 +27,14 @@ public class Tank {
 
 
     public void paint(Graphics g) {
-        g.fillRect(x,y,50,50);
+        //g.fillRect(x,y,50,50);
+        try {
+            BufferedImage tankL = ImageIO.read(Tank.class.getClassLoader().getResourceAsStream("images/GoodTank1.png"));
+            g.drawImage(tankL,x,y,null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         move();
     }
 
