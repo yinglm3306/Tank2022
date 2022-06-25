@@ -20,11 +20,14 @@ public class Tank {
     private boolean moving = false;
     private Group group;
 
-    public Tank(int x, int y,Dir dir,Group group) {
+    TankFrame tf;
+
+    public Tank(int x, int y,Dir dir,Group group,TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir=dir;
         this.group=group;
+        this.tf=tf;
     }
 
 
@@ -107,11 +110,17 @@ public class Tank {
             case KeyEvent.VK_UP : bU=false; break;
             case KeyEvent.VK_RIGHT : bR=false; break;
             case KeyEvent.VK_DOWN : bD=false; break;
+            case KeyEvent.VK_CONTROL : fire(); break;
 
 
         }
         setMainDir();
 
+
+    }
+
+    private void fire() {
+        tf.add(new Bullet(x,y,dir,group));
 
     }
 }

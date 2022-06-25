@@ -20,9 +20,13 @@ public class TankFrame extends Frame {
 
         this.addKeyListener(new TankKeyListener());  //Observer
 
-        myTank = new Tank(100,100,Dir.R,Group.GOOD);
-        enemy  = new Tank(200,200,Dir.D,Group.BAD);
+        myTank = new Tank(100,100,Dir.R,Group.GOOD,this);
+        enemy  = new Tank(200,200,Dir.D,Group.BAD,this);
         bullet= new Bullet(100,100,Dir.D,Group.BAD);
+    }
+
+    public void add(Bullet bullet){
+        this.bullet=bullet;
     }
 
     @Override
