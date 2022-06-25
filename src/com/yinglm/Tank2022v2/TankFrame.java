@@ -8,6 +8,7 @@ import java.awt.event.KeyListener;
 public class TankFrame extends Frame {
     private Tank myTank;
     private Tank enemy;
+    private Bullet bullet;
     public static final  int GAME_WIDTH=800;
     public static final  int GAME_HEIGHT=600;
 
@@ -21,6 +22,7 @@ public class TankFrame extends Frame {
 
         myTank = new Tank(100,100,Dir.R,Group.GOOD);
         enemy  = new Tank(200,200,Dir.D,Group.BAD);
+        bullet= new Bullet(100,100,Dir.D,Group.BAD);
     }
 
     @Override
@@ -28,6 +30,7 @@ public class TankFrame extends Frame {
 
         myTank.paint(g);
         enemy.paint(g);
+        bullet.paint(g);
 
 
 
