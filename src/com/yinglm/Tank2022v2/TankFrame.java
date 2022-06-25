@@ -34,11 +34,15 @@ public class TankFrame extends Frame {
 
     @Override
     public void paint(Graphics g) {
-
+        Color c = g.getColor();
+        g.setColor(Color.WHITE);
+        g.drawString("bullets: "+bullets.size(),10,50);
+       g.setColor(c);
         myTank.paint(g);
         enemy.paint(g);
         for(int i=0;i<bullets.size(); i++){
-            bullets.get(i).paint(g);
+            if(!bullets.get(i).isLive()){ bullets.remove(i);}
+            else {bullets.get(i).paint(g);}
         }
 
 
