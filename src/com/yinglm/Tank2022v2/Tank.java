@@ -18,27 +18,46 @@ public class Tank {
     private boolean bL,bR,bU,bD;
     private static final int SPEED=5;
     private boolean moving = false;
+    private Group group;
 
-    public Tank(int x, int y,Dir dir) {
+    public Tank(int x, int y,Dir dir,Group group) {
         this.x = x;
         this.y = y;
         this.dir=dir;
+        this.group=group;
     }
 
 
     public void paint(Graphics g) {
         //g.fillRect(x,y,50,50);
-        switch (dir){
-            case L:
-                g.drawImage(ResourceMgr.goodTankL,x,y,null);break;
-            case U:
-                g.drawImage(ResourceMgr.goodTankU,x,y,null);break;
-            case R:
-                g.drawImage(ResourceMgr.goodTankR,x,y,null);break;
-            case D:
-                g.drawImage(ResourceMgr.goodTankD,x,y,null);break;
+        if(this.group==Group.GOOD){
+            switch (dir){
+                case L:
+                    g.drawImage(ResourceMgr.goodTankL,x,y,null);break;
+                case U:
+                    g.drawImage(ResourceMgr.goodTankU,x,y,null);break;
+                case R:
+                    g.drawImage(ResourceMgr.goodTankR,x,y,null);break;
+                case D:
+                    g.drawImage(ResourceMgr.goodTankD,x,y,null);break;
 
+            }
         }
+
+        if(this.group==Group.BAD){
+            switch (dir){
+                case L:
+                    g.drawImage(ResourceMgr.badTankL,x,y,null);break;
+                case U:
+                    g.drawImage(ResourceMgr.badTankU,x,y,null);break;
+                case R:
+                    g.drawImage(ResourceMgr.badTankR,x,y,null);break;
+                case D:
+                    g.drawImage(ResourceMgr.badTankD,x,y,null);break;
+
+            }
+        }
+
         move();
     }
 

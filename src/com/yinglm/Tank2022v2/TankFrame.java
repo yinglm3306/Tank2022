@@ -19,8 +19,8 @@ public class TankFrame extends Frame {
 
         this.addKeyListener(new TankKeyListener());  //Observer
 
-        myTank = new Tank(100,100,Dir.R);
-        enemy  = new Tank(200,200,Dir.D);
+        myTank = new Tank(100,100,Dir.R,Group.GOOD);
+        enemy  = new Tank(200,200,Dir.D,Group.BAD);
     }
 
     @Override
@@ -29,11 +29,13 @@ public class TankFrame extends Frame {
         myTank.paint(g);
         enemy.paint(g);
 
-      //  x++;
-//        System.out.println("paint");  此方法画图时自动调用
+
 
     }
 
+    /**
+     * 以下为游戏中解决闪屏问题
+     */
     Image offScreenImage = null;
 
     @Override
