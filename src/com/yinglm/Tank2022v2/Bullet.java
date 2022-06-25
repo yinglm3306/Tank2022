@@ -61,13 +61,31 @@ public class Bullet {
 
 
         }
+
         boundsCheck();
     }
 
+    public void collidesWithTank(Tank tank) {
+        if(!tank.isLive()) return;
+        if(this.group==tank.getGroup()) return;
+        Rectangle rect = new Rectangle(x, y, ResourceMgr.bulletU.getWidth(), ResourceMgr.bulletU.getHeight());
+        Rectangle rectTank = new Rectangle(tank.getX(), tank.getY(), ResourceMgr.goodTankU.getWidth(), ResourceMgr.goodTankU.getHeight());
+
+        if(rect.intersects(rectTank)){
+            this.die();
+            tank.die();
+        }
+    }
+
     private void boundsCheck() {
-        if (x < 0 || y < 30 ||x>TankFrame.GAME_WIDTH||y>TankFrame.GAME_HEIGHT) {
+        if (x < 0 || y < 30 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT) {
             live = false;
 
         }
+    }
+
+    public void die(){
+        this.setLive(false);
+
     }
 }

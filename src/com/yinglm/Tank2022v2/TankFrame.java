@@ -10,7 +10,7 @@ import java.awt.event.KeyListener;
 public class TankFrame extends Frame {
     public static final TankFrame INSTANCE= new TankFrame();
 
-    private Tank myTank;
+    private Player myTank;
     private Tank enemy;
     private List<Bullet> bullets;
     public static final  int GAME_WIDTH=800,GAME_HEIGHT=600;
@@ -23,7 +23,7 @@ public class TankFrame extends Frame {
 
         this.addKeyListener(new TankKeyListener());  //Observer
 
-        myTank = new Tank(100,100,Dir.R,Group.GOOD);
+        myTank = new Player(100,100,Dir.R,Group.GOOD);
         enemy  = new Tank(200,200,Dir.D,Group.BAD);
         bullets = new ArrayList<>();
     }
@@ -41,8 +41,11 @@ public class TankFrame extends Frame {
         myTank.paint(g);
         enemy.paint(g);
         for(int i=0;i<bullets.size(); i++){
+            bullets.get(i).collidesWithTank(enemy);
+
             if(!bullets.get(i).isLive()){ bullets.remove(i);}
-            else {bullets.get(i).paint(g);}
+            else {
+                bullets.get(i).paint(g);}
         }
 
 
