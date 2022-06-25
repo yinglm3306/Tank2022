@@ -6,22 +6,23 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class TankFrame extends Frame {
+    public static final TankFrame INSTANCE= new TankFrame();
+
     private Tank myTank;
     private Tank enemy;
     private Bullet bullet;
-    public static final  int GAME_WIDTH=800;
-    public static final  int GAME_HEIGHT=600;
+    public static final  int GAME_WIDTH=800,GAME_HEIGHT=600;
 
 
-    public TankFrame(){
+    private TankFrame(){
         this.setTitle("tank war");
         this.setLocation(200,100);
         this.setSize(GAME_WIDTH,GAME_HEIGHT);
 
         this.addKeyListener(new TankKeyListener());  //Observer
 
-        myTank = new Tank(100,100,Dir.R,Group.GOOD,this);
-        enemy  = new Tank(200,200,Dir.D,Group.BAD,this);
+        myTank = new Tank(100,100,Dir.R,Group.GOOD);
+        enemy  = new Tank(200,200,Dir.D,Group.BAD);
         bullet= new Bullet(100,100,Dir.D,Group.BAD);
     }
 

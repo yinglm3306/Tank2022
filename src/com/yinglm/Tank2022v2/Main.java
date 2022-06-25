@@ -2,7 +2,7 @@ package com.yinglm.Tank2022v2;
 
 public class Main {
     public static void main(String[] args) {
-        TankFrame tf= new TankFrame();
+        TankFrame tf= TankFrame.INSTANCE;
 
         tf.setVisible(true);
 
