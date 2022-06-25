@@ -1,5 +1,7 @@
 package com.yinglm.Tank2022v2;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -10,7 +12,7 @@ public class TankFrame extends Frame {
 
     private Tank myTank;
     private Tank enemy;
-    private Bullet bullet;
+    private List<Bullet> bullets;
     public static final  int GAME_WIDTH=800,GAME_HEIGHT=600;
 
 
@@ -23,11 +25,11 @@ public class TankFrame extends Frame {
 
         myTank = new Tank(100,100,Dir.R,Group.GOOD);
         enemy  = new Tank(200,200,Dir.D,Group.BAD);
-        bullet= new Bullet(100,100,Dir.D,Group.BAD);
+        bullets = new ArrayList<>();
     }
 
     public void add(Bullet bullet){
-        this.bullet=bullet;
+        this.bullets.add(bullet);
     }
 
     @Override
@@ -35,7 +37,9 @@ public class TankFrame extends Frame {
 
         myTank.paint(g);
         enemy.paint(g);
-        bullet.paint(g);
+        for(int i=0;i<bullets.size(); i++){
+            bullets.get(i).paint(g);
+        }
 
 
 
