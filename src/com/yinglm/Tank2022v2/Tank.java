@@ -22,12 +22,21 @@ public class Tank {
     private Group group;
     private boolean live = true;
 
+    private int width,heigth;
+    private int oldX, oldY;
+
 
     public Tank(int x, int y, Dir dir, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
+
+        oldX = x;
+        oldY = y;
+
+        this.width= ResourceMgr.goodTankU.getWidth();
+        this.heigth= ResourceMgr.goodTankU.getHeight();
 
     }
 
@@ -102,6 +111,11 @@ public class Tank {
 
     private void move() {
         if (!moving) return;
+
+        oldX = x;
+        oldY = y;
+
+
         switch (dir) {
             case L:
                 x -= SPEED;
@@ -117,6 +131,8 @@ public class Tank {
                 break;
 
         }
+
+        boundsCheck();
         randomDir();
         if (r.nextInt(100) > 90) fire();
 
@@ -131,6 +147,18 @@ public class Tank {
 
     }
 
+    private void boundsCheck() {
+        if (x < 0 || y < 30 || x+width > TankFrame.GAME_WIDTH || y+heigth > TankFrame.GAME_HEIGHT) {
+            this.back();
+
+        }
+    }
+
+    private void back() {
+        this.x = oldX;
+        this.y = oldY;
+    }
+
 
     private void fire() {
 
@@ -142,5 +170,6 @@ public class Tank {
 
     public void die() {
         this.setLive(false);
+        TankFrame.INSTANCE.add(new Explode(x,y));
     }
 }
