@@ -127,7 +127,10 @@ public class Player {
     private void fire() {
         int bX= x+ ResourceMgr.goodTankU.getWidth()/2- ResourceMgr.bulletU.getWidth()/2;
         int bY= y+ ResourceMgr.goodTankU.getHeight()/2- ResourceMgr.bulletU.getHeight()/2;
-        TankFrame.INSTANCE.add(new Bullet(bX,bY,dir,group));
+       // TankFrame.INSTANCE.add(new Bullet(bX,bY,dir,group));
+        Dir[] dirs= Dir.values();
+        for (Dir d:dirs)
+            TankFrame.INSTANCE.add(new Bullet(bX,bY,d,group));
 
     }
 
