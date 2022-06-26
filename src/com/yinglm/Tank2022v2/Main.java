@@ -4,6 +4,8 @@ public class Main {
     public static void main(String[] args) {
         TankFrame tf= TankFrame.INSTANCE;
 
+        new Thread(()->new Audio("audio/war1.wav").loop()).start();
+
         tf.setVisible(true);
 
         for(;;){
