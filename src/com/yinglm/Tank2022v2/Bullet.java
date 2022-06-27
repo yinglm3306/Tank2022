@@ -16,6 +16,19 @@ public class Bullet {
         this.group = group;
     }
 
+    /**
+     * 以下测试代码自己加入
+     * @return
+     */
+
+//    public Dir getDir() {
+//        return dir;
+//    }
+//
+//    public void setDir(Dir dir) {
+//        this.dir = dir;
+//    }
+
     public boolean isLive() {
         return live;
     }

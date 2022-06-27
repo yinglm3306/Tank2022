@@ -1,5 +1,10 @@
 package com.yinglm.Tank2022v2;
 
+import com.yinglm.Tank2022v2.strategy.DefaultFireStrategy;
+import com.yinglm.Tank2022v2.strategy.FireStrategy;
+import com.yinglm.Tank2022v2.strategy.FourFireStrategy;
+import com.yinglm.Tank2022v2.strategy.LeftRightFireStrategy;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
@@ -26,6 +31,22 @@ public class Player {
         this.dir=dir;
         this.group=group;
 
+    }
+
+    public Dir getDir() {
+        return dir;
+    }
+
+    public void setDir(Dir dir) {
+        this.dir = dir;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
     }
 
     public boolean isLive() {
@@ -125,12 +146,15 @@ public class Player {
     }
 
     private void fire() {
-        int bX= x+ ResourceMgr.goodTankU.getWidth()/2- ResourceMgr.bulletU.getWidth()/2;
-        int bY= y+ ResourceMgr.goodTankU.getHeight()/2- ResourceMgr.bulletU.getHeight()/2;
-       // TankFrame.INSTANCE.add(new Bullet(bX,bY,dir,group));
-        Dir[] dirs= Dir.values();
-        for (Dir d:dirs)
-            TankFrame.INSTANCE.add(new Bullet(bX,bY,d,group));
+
+        FireStrategy strategy=new LeftRightFireStrategy();
+        strategy.fire(this);
+//        int bX= x+ ResourceMgr.goodTankU.getWidth()/2- ResourceMgr.bulletU.getWidth()/2;
+//        int bY= y+ ResourceMgr.goodTankU.getHeight()/2- ResourceMgr.bulletU.getHeight()/2;
+//       // TankFrame.INSTANCE.add(new Bullet(bX,bY,dir,group));
+//        Dir[] dirs= Dir.values();
+//        for (Dir d:dirs)
+//            TankFrame.INSTANCE.add(new Bullet(bX,bY,d,group));
 
     }
 
