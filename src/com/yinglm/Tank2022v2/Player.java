@@ -14,7 +14,7 @@ import java.awt.event.KeyEvent;
  * @Description: com.yinglm.Tank2022v2
  * @Version: 1.0
  **/
-public class Player {
+public class Player extends  AbstractGameObject{
     private int x,y;
     private Dir dir;
     private boolean bL,bR,bU,bD;
@@ -30,6 +30,8 @@ public class Player {
         this.y = y;
         this.dir=dir;
         this.group=group;
+        //init fire strategy forom config file
+        this.initFireStrategy();
 
     }
 
@@ -145,9 +147,28 @@ public class Player {
 
     }
 
+    FireStrategy strategy=null;
+    private void initFireStrategy(){
+
+        // ClassLoader loader = Player.class.getClassLoader();//获取本类的类加载器
+
+
+        String classname= PropertyMgr.get("tankFireStrategy");
+
+        try {
+            // Class clazz= loader.loadClass("com.yinglm.Tank2022v2.strategy."+classname);
+            Class clazz= Class.forName("com.yinglm.Tank2022v2.strategy."+classname);
+            strategy=(FireStrategy) (clazz.getDeclaredConstructor().newInstance());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private void fire() {
 
-        FireStrategy strategy=new LeftRightFireStrategy();
+
+
+//        FireStrategy strategy=new LeftRightFireStrategy();
         strategy.fire(this);
 //        int bX= x+ ResourceMgr.goodTankU.getWidth()/2- ResourceMgr.bulletU.getWidth()/2;
 //        int bY= y+ ResourceMgr.goodTankU.getHeight()/2- ResourceMgr.bulletU.getHeight()/2;

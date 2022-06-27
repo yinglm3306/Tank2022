@@ -13,7 +13,7 @@ import java.util.Random;
  * @Description: com.yinglm.Tank2022v2
  * @Version: 1.0
  **/
-public class Tank {
+public class Tank extends AbstractGameObject {
     private int x, y;
     private Dir dir;
     private boolean bL, bR, bU, bD;
@@ -24,6 +24,7 @@ public class Tank {
 
     private int width,heigth;
     private int oldX, oldY;
+    private Rectangle rect;
 
 
     public Tank(int x, int y, Dir dir, Group group) {
@@ -37,6 +38,8 @@ public class Tank {
 
         this.width= ResourceMgr.goodTankU.getWidth();
         this.heigth= ResourceMgr.goodTankU.getHeight();
+
+        this.rect=new Rectangle(x,y,width,heigth);
 
     }
 
@@ -93,6 +96,10 @@ public class Tank {
         }
 
         move();
+
+        //update rect
+        rect.x=x;
+        rect.y=y;
     }
 
 
@@ -154,7 +161,7 @@ public class Tank {
         }
     }
 
-    private void back() {
+    public void back() {
         this.x = oldX;
         this.y = oldY;
     }
@@ -171,5 +178,9 @@ public class Tank {
     public void die() {
         this.setLive(false);
         TankFrame.INSTANCE.add(new Explode(x,y));
+    }
+
+    public Rectangle getRect() {
+        return rect;
     }
 }

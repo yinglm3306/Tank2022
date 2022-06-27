@@ -2,7 +2,7 @@ package com.yinglm.Tank2022v2;
 
 import java.awt.*;
 
-public class Explode {
+public class Explode extends AbstractGameObject {
 
     private int x, y;
     private int width, height;

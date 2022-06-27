@@ -2,18 +2,24 @@ package com.yinglm.Tank2022v2;
 
 import java.awt.*;
 
-public class Bullet {
+public class Bullet extends AbstractGameObject {
     public static final int SPEED = 10;
     private int x, y;
     private Dir dir;
     private Group group;
     private boolean live = true;
+    private int w=ResourceMgr.bulletU.getWidth();
+    private int h=ResourceMgr.bulletU.getHeight();
+
+    private Rectangle rect;
 
     public Bullet(int x, int y, Dir dir, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
+
+        rect= new Rectangle(x,y,w,h);
     }
 
     /**
@@ -55,6 +61,9 @@ public class Bullet {
 
         }
         move();
+        rect.x=x;
+        rect.y=y;
+
     }
 
     private void move() {
@@ -74,6 +83,9 @@ public class Bullet {
 
 
         }
+        //update the rect
+//        rect.x=x;
+//        rect.y=y;
 
         boundsCheck();
     }
@@ -81,13 +93,17 @@ public class Bullet {
     public void collidesWithTank(Tank tank) {
         if(!this.isLive() || !tank.isLive()) return;
         if(this.group==tank.getGroup()) return;
-        Rectangle rect = new Rectangle(x, y, ResourceMgr.bulletU.getWidth(), ResourceMgr.bulletU.getHeight());
+       // Rectangle rect = new Rectangle(x, y, ResourceMgr.bulletU.getWidth(), ResourceMgr.bulletU.getHeight());
         Rectangle rectTank = new Rectangle(tank.getX(), tank.getY(), ResourceMgr.goodTankU.getWidth(), ResourceMgr.goodTankU.getHeight());
 
         if(rect.intersects(rectTank)){
             this.die();
             tank.die();
         }
+    }
+
+    public Rectangle getRect(){
+        return rect;
     }
 
     private void boundsCheck() {
@@ -100,5 +116,19 @@ public class Bullet {
     public void die(){
         this.setLive(false);
 
+    }
+
+    @Override
+    public String toString() {
+        return "Bullet{" +
+                "x=" + x +
+                ", y=" + y +
+                ", dir=" + dir +
+                ", group=" + group +
+                ", live=" + live +
+                ", w=" + w +
+                ", h=" + h +
+                ", rect=" + rect +
+                '}';
     }
 }
